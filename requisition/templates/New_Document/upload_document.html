@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>New Document</title>
+
+</head>
+  <body>
+    {% include 'header.html' %}
+
+    {% block content %}
+
+
+  <h1>Upload a new document</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
+
+{% endblock %}
+
+
+    <footer>
+      <p>Copyright &copy; 2023</p>
+    </footer>
+  </body>
+</html>

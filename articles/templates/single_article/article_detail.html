@@ -1,0 +1,38 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ article.title }}</title>
+    <link rel="stylesheet" href="{% static 'articles/style.css' %}">
+  </head>
+  <body>
+    <header>
+      <h1>{{ article.title }}</h1>
+    </header>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Furniture</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+    </nav>
+
+
+    <section>
+       
+        
+      <div class="single-item">
+        <img src="https://via.placeholder.com/500x300" alt="Furniture Item">
+        <!-- <h3><a href="">{{ article.title }}</a></h3> -->
+        <h3>{{ article.title }}</a></h3>
+        <p>{{ article.snippet }}</p>
+        <p>{{ article.date }}</p>
+      </div>
+      
+    </section>
+    <footer>
+      <p>&copy; My Furniture Shop</p>
+    </footer>
+  </body>
+</html>

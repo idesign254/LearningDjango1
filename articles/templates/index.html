@@ -1,0 +1,38 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Furniture Shop</title>
+    <link rel="stylesheet" href="{% static 'articles/style.css' %}">
+  </head>
+  <body>
+    <header>
+      <h1>My Furniture Shop</h1>
+    </header>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Furniture</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+    </nav>
+
+
+    <section>
+      {% for article in articles %}
+      <div class="item">
+        <a href="{% url 'articles:article_detail' article.id %}">
+        <img src="https://via.placeholder.com/500x300"></a>
+        <h3>{{ article.title }}</a></h3>
+        <p>{{ article.snippet }}</p>
+        <p>{{ article.date }}</p>
+      </div>
+      {% endfor %}
+    </section>
+    
+    <footer>
+      <p>&copy; My Furniture Shop</p>
+    </footer>
+  </body>
+</html>

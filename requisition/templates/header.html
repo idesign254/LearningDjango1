@@ -1,0 +1,191 @@
+<style>
+  /* Global Styles */
+
+  body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+/* Header Styles */
+header {
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+nav a {
+  color: #444444;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin: 0 1rem;
+  transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: #00a86b;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0;
+  padding: 0;
+}
+
+h4 {
+  color: #444444;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    display: none;
+  }
+}
+
+
+/* Main Styles */
+
+main {
+  padding: 2em;
+  text-align: center;
+}
+
+main h2 {
+  margin-top: 0;
+}
+
+/* Buttons  */
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #6ABE30;
+  background-image: linear-gradient(to bottom right, #6ABE30, #4F9F27);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.1);
+}
+
+
+/* form  */
+/* Style for the form container */
+form {
+max-width: 500px;
+margin: 0 auto;
+}
+
+/* Style for the form title */
+h1 {
+text-align: center;
+}
+
+/* Style for the form fields */
+.form-control {
+display: block;
+width: 100%;
+padding: 0.375rem 0.75rem;
+font-size: 1rem;
+line-height: 1.5;
+color: #495057;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid #ced4da;
+border-radius: 0.25rem;
+transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Style for the form file input field */
+.form-control-file {
+display: block;
+width: 100%;
+height: calc(2.25rem + 2px);
+padding: 0.375rem 0.75rem;
+font-size: 1rem;
+font-weight: 400;
+line-height: 1.5;
+color: #495057;
+background-color: #fff;
+background-clip: padding-box;
+border: 1px solid #ced4da;
+border-radius: 0.25rem;
+transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Style for the form submit button */
+.btn-primary {
+color: #fff;
+background-color: #007bff;
+border-color: #007bff;
+}
+.btn-primary:hover {
+color: #fff;
+background-color: #0069d9;
+border-color: #0062cc;
+}
+
+
+/* Footer Styles */
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 1em;
+  margin-top: 2em;
+}
+
+footer p {
+  margin: 0;
+}
+</style>
+</head>
+<body>
+
+{% block content%}
+{% include 'nav-bar.html' %}
+
+  <main>
+    <div class="button-container">
+      <a href="{% url 'requisition:new_application' %}" class="button">New Application</a>
+      <a href="{% url 'requisition:view_applications' %}" class="button">View Applications</a>
+      <a href="{% url 'requisition:upload_document' %}" class="button">Add Document</a>
+      <a href="{% url 'requisition:view_document' %}" class="button">View Document</a>
+      <a href="{% url 'requisition:send_approval_request' %}" class="button">Send Approval Request</a>
+      <a href="{% url 'requisition:cancel_approval_request' %}" class="button">Cancel Approval Request</a>
+      <a href="{% url 'requisition:document_approval_status' %}" class="button">Document Approval Status</a>
+    </div>
+  </main>
+{% endblock %}

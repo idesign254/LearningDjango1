@@ -1,0 +1,14 @@
+{% block content%}
+<header>
+    <nav>
+      <a href="{% url 'requisition:home' %}"><h4> Meru University</h4></a>
+      <ul>
+        <li><a href="{% url 'requisition:signup' %}">SignUp</a></li>
+        <li><a href="{% url 'requisition:login' %}">Login</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+      <a href="{% url 'requisition:home' %}"><h4>You are {{ auth_user.username }}</h4></a>
+
+    </nav>
+  </header>
+{% endblock%}

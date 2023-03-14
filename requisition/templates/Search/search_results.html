@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Send Approval Request</title>
+    <style>
+      /* Global Styles */
+
+      body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+    }
+    
+    /* Header Styles */
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    
+    nav a {
+      color: #444444;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem;
+      margin: 0 1rem;
+      transition: color 0.2s ease-in-out;
+    }
+    
+    nav a:hover {
+      color: #00a86b;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav li {
+      margin: 0;
+      padding: 0;
+    }
+    
+    h4 {
+      color: #444444;
+      font-size: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    
+    @media screen and (max-width: 768px) {
+      nav {
+        display: none;
+      }
+    }
+    
+    
+    /* Main Styles */
+    
+    main {
+      padding: 2em;
+      text-align: center;
+    }
+    
+    main h2 {
+      margin-top: 0;
+    }
+    
+    /* Buttons  */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #6ABE30;
+      background-image: linear-gradient(to bottom right, #6ABE30, #4F9F27);
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease-in-out;
+    }
+    
+    .button:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Search form  */
+    form {
+    display: flex;
+    align-items: center;
+}
+
+input[type="text"] {
+    width: 300px;
+    height: 40px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    outline: none;
+}
+
+button[type="submit"] {
+    height: 40px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0069d9;
+}
+
+    /* Footer Styles */
+    
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1em;
+      margin-top: 2em;
+    }
+    
+    footer p {
+      margin: 0;
+    }
+</style>
+</head>
+  <body>
+    {% include 'header.html' %}
+
+    <main>
+        <form method="get" action="{% url 'search_results' %}">
+            <label for="search_query">Search:</label>
+            <input type="text" id="search_query" name="q">
+            <button type="submit">Search</button>
+          </form>
+
+    
+          {% if results %}
+          <ul>
+          {% for application in results %}
+          <li>{{ application.applicant_name }}</li>
+          {% endfor %}
+           </ul>
+          {% else %}
+           <p>No results found.</p>
+        {% endif %}
+        
+    </main>
+    <footer>
+      <p>Copyright &copy; 2023</p>
+    </footer>
+  </body>
+</html>

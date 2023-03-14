@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>View Document</title>
+    <style>
+        body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+      }
+      
+      /* Header Styles */
+      header {
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+      }
+      
+      nav {
+        display: flex;
+        align-items: center;
+      }
+      
+      nav a {
+        color: #444444;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0.5rem;
+        margin: 0 1rem;
+        transition: color 0.2s ease-in-out;
+      }
+      
+      nav a:hover {
+        color: #00a86b;
+      }
+      
+      nav ul {
+        list-style: none;
+        display: flex;
+        margin: 0;
+        padding: 0;
+      }
+      
+      nav li {
+        margin: 0;
+        padding: 0;
+      }
+      
+      h4 {
+        color: #444444;
+        font-size: 1.5rem;
+        margin: 0;
+        padding: 0;
+      }
+      
+      @media screen and (max-width: 768px) {
+        nav {
+          display: none;
+        }
+      }
+      
+      
+      /* Main Styles */
+      
+      main {
+        padding: 2em;
+        text-align: center;
+      }
+      
+      main h2 {
+        margin-top: 0;
+      }
+      
+      /* Buttons  */
+      .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+      
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #6ABE30;
+        background-image: linear-gradient(to bottom right, #6ABE30, #4F9F27);
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        text-decoration: none;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+      }
+      
+      .button:hover {
+        transform: scale(1.1);
+      }
+.container {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 50px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+/* Tacle CSS */
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+    </style>
+  </head>
+  <body>
+    {% include 'header.html' %}
+
+
+    <div class="container">
+      <h1>View Document</h1>
+      {% block content %}
+    <h2>View Documents</h2>
+    <ul>
+        {% for image in images %}
+            <li>
+                <img src="{{ image.image.url }}" alt="image">
+            </li>
+        {% empty %}
+            <li>No images uploaded yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+      
+    </div>
+  </body>
+</html>
