@@ -157,7 +157,6 @@ table {
 
 
     <div class="container">
-      <h1>Applicants Present</h1>
       {% block content %}
       <table>
         <tr>
@@ -193,7 +192,7 @@ table {
       {% if application.status == 'pending' %}
     <a href="{% url 'application_approval' application.pk %}">Approve this application</a>
         {% endif %}
-      <a href="{% url 'requisition:view_applications' %}" class="button">Back</a>
+      <a href="{% url 'requisition:view_applications' %}" class="button-back">Back</a>
       
     {% endblock %}
       

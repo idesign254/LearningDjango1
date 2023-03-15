@@ -13,20 +13,6 @@ class LoginForm(AuthenticationForm):
     class Meta:
         fields = ['username', 'password']
 
-class RegistrationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-
-    class Meta:
-        model = User
-        fields = ('email', 'first_name', 'last_name', 'password1', 'password2')
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.email = self.cleaned_data['email']
-        if commit:
-            user.save()
-        return user
-
 
 class UploadFileForm(forms.Form):
     file = forms.FileField()
@@ -55,7 +41,8 @@ class UserForm(forms.ModelForm):
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ['document_name', 'uploaded_by', 'uploaded_date', 'document_file']
+        fields = ['document_name', 'uploaded_by', 'uploaded_date', 'document_file','approved']
+        exclude = ('approved',)
         widgets = {
             'document_name': forms.TextInput(attrs={'class': 'form-control'}),
             'uploaded_by': forms.TextInput(attrs={'class': 'form-control'}),

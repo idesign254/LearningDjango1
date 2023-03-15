@@ -5,8 +5,6 @@ from .views import make_application
 from .views import application_detail
 from .views import ApplicationApprovalView
 from .views import search_results
-from .views import upload_image
-from .views import register
 from .views import login_view
 from .views import upload_document
 from .views import document_detail
@@ -46,9 +44,6 @@ urlpatterns = [
     # path('upload/', views.upload_file, name='upload_file'),
     # path('Document_Approval_Status/', ApplicationApprovalView.as_view(), name='application_approval')
 
-    path('upload/', views.upload_image, name='upload_image'),
-
-    path('Register/', register, name='register',),
 
     # path('Login/', auth_views.LoginView.as_view(template_name='Login/login.html'), name='login'),
     # path('Logout/', LogoutView.as_view(), name='logout'),

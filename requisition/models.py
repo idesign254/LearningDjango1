@@ -33,16 +33,6 @@ class User(AbstractBaseUser):
     objects = CustomUserManager()
 
 
-# class User(models.Model):
-#     username = models.CharField(max_length=50)
-#     email = models.EmailField()
-#     password1 = models.CharField(max_length=128, default='default_password')
-#     password2 = models.CharField(max_length=128)
-
-#     def __str__(self):
-#         return self.username
-
-
 class Application(models.Model):
     applicant_name = models.CharField(max_length=100)
     item = models.CharField(max_length=100)
@@ -54,12 +44,6 @@ class Application(models.Model):
 
     def __str__(self):
         return self.applicant_name
-
-
-class Uploads(models.Model):
-    name = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='images/')
-
 
 class School(models.Model):
     title = models.CharField(max_length=200)

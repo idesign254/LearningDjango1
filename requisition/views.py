@@ -6,7 +6,6 @@ from django.conf import settings
 from django.db.models import Q
 from django.core.files.storage import FileSystemStorage
 
-from .models import Uploads
 from .models import School
 from .models import Document
 from .models import Application
@@ -18,7 +17,6 @@ from .forms import ApplicationForm
 from .forms import UserForm
 from .forms import DocumentForm
 
-from .forms import RegistrationForm
 from django.contrib.auth.models import User
 
 from django.contrib.auth.views import LogoutView
@@ -35,14 +33,6 @@ def view_images(request):
     images = Uploads.objects.all()
     context = {'images': images}
     return render(request, 'View_Document/ViewDocument.html', context)
-
-def upload_image(request):
-    if request.method == 'POST':
-        image = request.FILES['image']
-        image_model = Uploads.objects.create(image=image)
-        image_model.save()
-    return render(request, 'upload/upload_document.html')
-
 
 def search_results(request):
     query = request.GET.get('q')
@@ -115,18 +105,6 @@ def approval_request_view(request):
     form = ApprovalRequestForm()
     context = {'form': form}
     return render(request, 'Send_Approval_Request/SendApproval.html', context)    
-
-def register(request):
-    if request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            # return redirect('home')
-            success_message = 'Your have registered successfully!'
-    else:
-        form = RegistrationForm()
-        success_message = ''
-    return render(request, 'Register/register.html', {'form': form})
 
 # @login_required
 def make_application(request):

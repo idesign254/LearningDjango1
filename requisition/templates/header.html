@@ -95,6 +95,36 @@ main h2 {
   transition: all 0.3s ease-in-out;
 }
 
+.button-danger {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FF0000; /* red background color */
+  background-image: linear-gradient(to bottom right, #FF0000, #FF4500); /* gradient from red to orange */
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-back {
+  background-color: #FFA500;
+  background-image: linear-gradient(to bottom right, #FFA500, #FF8C00);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+
 .button:hover {
   transform: scale(1.1);
 }
@@ -156,6 +186,25 @@ background-color: #0069d9;
 border-color: #0062cc;
 }
 
+/* Submit Button */
+/* Submit Button */
+.submit-btn {
+  background-color: #FFA500;
+  background-image: linear-gradient(to bottom right, #FFA500, #FF8C00);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit-btn:hover {
+  transform: scale(1.1);
+}
+
 
 /* Footer Styles */
 
@@ -183,8 +232,6 @@ footer p {
       <a href="{% url 'requisition:view_applications' %}" class="button">View Applications</a>
       <a href="{% url 'requisition:upload_document' %}" class="button">Add Document</a>
       <a href="{% url 'requisition:view_document' %}" class="button">View Document</a>
-      <a href="{% url 'requisition:send_approval_request' %}" class="button">Send Approval Request</a>
-      <a href="{% url 'requisition:cancel_approval_request' %}" class="button">Cancel Approval Request</a>
       <a href="{% url 'requisition:document_approval_status' %}" class="button">Document Approval Status</a>
     </div>
   </main>
