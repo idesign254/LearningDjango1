@@ -22,8 +22,6 @@ from .forms import LoginForm
 from .views import signup
 
 
-
-
 app_name = 'requisition'
 
 urlpatterns = [

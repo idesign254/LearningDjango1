@@ -28,12 +28,23 @@ from django.utils.text import Truncator
 
 from .forms import SignupForm
 
-
 # Create your views here.
-def view_images(request):
-    images = Uploads.objects.all()
-    context = {'images': images}
-    return render(request, 'View_Document/ViewDocument.html', context)
+
+def home_view(request):
+    return render(request, 'requisition.html')
+
+def Cancel_Approval_Request(request):
+    return render(request, 'Cancel_Approval_Request/CancelApprovalRequest.html')
+
+def Document_Approval_Status(request):
+    return render(request, 'Document_Approval_Status/Approval.html')
+
+def New_Application(request):
+    return render(request, 'New_Application/Application.html')
+
+def Send_Approval_Request(request):
+    return render(request, 'Send_Approval_Request/SendApproval.html')
+
 
 def search_results(request):
     query = request.GET.get('q')
@@ -60,11 +71,13 @@ class ApplicationApprovalView(View):
         # Render a confirmation message to the user.
         return render(request, 'Approval/application_approval.html', {'message': message})
 
+@login_required(login_url='requisition:login')
 def View_Applications(request):
     applications = Application.objects.all()
     return render(request, 'Applications/View_Application.html', {'applications': applications})
 
 
+@login_required(login_url='requisition:login')
 def application_detail(request, pk):
     application = get_object_or_404(Application, pk=pk)
     context = {'application': application}
@@ -83,21 +96,7 @@ def create_post(request):
     return render(request, 'Blog/blog_post.html', {'form': form, 'success_message': success_message})
 
 
-def home_view(request):
-    return render(request, 'requisition.html')
-
-def Cancel_Approval_Request(request):
-    return render(request, 'Cancel_Approval_Request/CancelApprovalRequest.html')
-
-def Document_Approval_Status(request):
-    return render(request, 'Document_Approval_Status/Approval.html')
-
-def New_Application(request):
-    return render(request, 'New_Application/Application.html')
-
-def Send_Approval_Request(request):
-    return render(request, 'Send_Approval_Request/SendApproval.html')
-
+@login_required(login_url='requisition:login')
 def View_Document(request):
     documents = Document.objects.all()
     return render(request, 'View_Document/ViewDocument.html', {'documents': documents})
@@ -107,7 +106,7 @@ def approval_request_view(request):
     context = {'form': form}
     return render(request, 'Send_Approval_Request/SendApproval.html', context)    
 
-# @login_required
+@login_required(login_url='requisition:login')
 def make_application(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
@@ -134,6 +133,7 @@ def login_view(request):
             messages.error(request, 'Invalid login credentials')
     return render(request, 'Login/login.html')
 
+@login_required(login_url='requisition:login')
 def upload_document(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
@@ -144,6 +144,7 @@ def upload_document(request):
         form = DocumentForm()
     return render(request, 'New_Document/upload_document.html', {'form': form})
 
+@login_required(login_url='requisition:login')
 def view_document(request):
     documents = Document.objects.all()
     return render(request, 'View_Document/view_document.html', {'documents': documents})
@@ -160,7 +161,7 @@ def signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return redirect('requisition:new_application')
+            return redirect('requisition:login')
     else:
         form = SignupForm()
     return render(request, 'SignUp/signup.html', {'form': form})
