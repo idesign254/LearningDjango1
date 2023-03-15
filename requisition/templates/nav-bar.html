@@ -1,14 +1,25 @@
-{% block content%}
+{% load static %}
+
+{% block content %}
 <header>
     <nav>
-      <a href="{% url 'requisition:home' %}"><h4> Meru University</h4></a>
+      <a href="{% url 'requisition:home' %}">
+        <img src="{% static 'media/must_logo.png' %}" alt="Meru University Logo">
+      </a>
+      
       <ul>
         <li><a href="{% url 'requisition:signup' %}">SignUp</a></li>
-        <li><a href="{% url 'requisition:login' %}">Login</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'requisition:logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'requisition:login' %}">Login</a></li>
+        {% endif %}
         <li><a href="#">Contact Us</a></li>
       </ul>
-      <a href="{% url 'requisition:home' %}"><h4>You are {{ auth_user.username }}</h4></a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'requisition:home' %}"><p>You are : {{ request.user }}</p></a>
+      {% endif %}
 
     </nav>
   </header>
-{% endblock%}
+{% endblock %}

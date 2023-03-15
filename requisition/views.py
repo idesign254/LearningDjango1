@@ -20,6 +20,7 @@ from .forms import DocumentForm
 from django.contrib.auth.models import User
 
 from django.contrib.auth.views import LogoutView
+
 from .forms import DocumentForm
 from django.contrib import messages
 
@@ -159,7 +160,7 @@ def signup(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            return render(request, 'Login/login.html', {'username': username})
+            return redirect('requisition:new_application')
     else:
         form = SignupForm()
     return render(request, 'SignUp/signup.html', {'form': form})

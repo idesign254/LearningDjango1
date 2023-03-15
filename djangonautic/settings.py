@@ -131,4 +131,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
-LOGIN_REDIRECT_URL = 'requisition/view_document/'
+LOGIN_REDIRECT_URL = 'requisition:home'
+LOGOUT_REDIRECT_URL = 'requisition:login'
