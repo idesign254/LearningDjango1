@@ -145,7 +145,6 @@ th {
             <th>Quantity Date</th>
             <th>Reason</th>
             <th>Date Created</th>
-            <!-- <th>User</th> -->
             <th>Approval Status</th>
             <th>View Option</th>
           </tr>
@@ -158,7 +157,6 @@ th {
             <td>{{ application.quantity }}</td>
             <td>{{ application.reason|truncatewords:10 }}</td>
             <td>{{ application.date_created }}</td>
-            <!-- <td>{{ application.user }}</td> -->
             <td>{{ application.approval }}</td>
             <td><a href="{% url 'requisition:application_detail' pk=application.pk %}">View</a></td>
           </tr>

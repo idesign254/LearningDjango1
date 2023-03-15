@@ -9,12 +9,10 @@ from django.core.files.storage import FileSystemStorage
 from .models import School
 from .models import Document
 from .models import Application
-from .forms import ApprovalRequestForm
 from .forms import BlogPostForm
 
 from .forms import ApplicationForm
 
-from .forms import UserForm
 from .forms import DocumentForm
 
 from django.contrib.auth.models import User
@@ -139,7 +137,7 @@ def upload_document(request):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('../base.html')  # replace 'home' with the name of your homepage URL
+            return redirect('requisition:view_document')              
     else:
         form = DocumentForm()
     return render(request, 'New_Document/upload_document.html', {'form': form})

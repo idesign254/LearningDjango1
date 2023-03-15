@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.base_user import BaseUserManager
 
+import os
+from uuid import uuid4
+
 # Create your models here.
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -54,11 +57,17 @@ class School(models.Model):
     def __str__(self):
         return self.title
 
+
+def get_file_path(instance, filename):
+    ext = filename.split('.')[-1]
+    filename = f"{uuid4().hex}.{ext}"
+    return os.path.join('uploads', filename)
+
 class Document(models.Model):
     document_name = models.CharField(max_length=100)
     uploaded_by = models.CharField(max_length=100)
     uploaded_date = models.DateField()
-    document_file = models.FileField(upload_to='media/')
+    document_file = models.FileField(upload_to=get_file_path)
 
     def __str__(self):
         return self.document_name
@@ -70,22 +79,6 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
-
-
-class Staff(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE)
-    profile_pic= models.ImageField(upload_to='image/staff/',null=True,blank=True)
-    address = models.CharField(max_length=40)
-    mobile = models.CharField(max_length=20,null=False)
-    @property
-    def get_name(self):
-        return self.user.first_name+" "+self.user.last_name
-    @property
-    def get_id(self):
-        return self.user.id
-    def __str__(self):
-        return self.user.first_name
-
 
 class DocumentFile(models.Model):
     name = models.CharField(max_length=40)

@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -131,6 +133,12 @@ button[type="submit"]:hover {
         {% csrf_token %}
 
         <div class="mb-3">
+          <a href="{% url 'requisition:home' %}">
+            <img src="{% static 'must_logo.png' %}" alt="Meru University Logo">
+          </a>
+        </div>
+
+        <div class="mb-3">
             <label class="inline-block mb-2">Username</label><br>
             {{ form.username }}
         </div>
@@ -150,8 +158,8 @@ button[type="submit"]:hover {
             </div>
         {% endif %}
 
-        <button class="submit-btn">Submit</button>
-        <a href="{% url 'requisition:signup' %}"><span class="login-btn">SignUp</span></a>
+        <button class="submit-btn">Login</button>
+        <a href="{% url 'requisition:signup' %}"><span class="login-btn">Sign Up Now</span></a>
     </form>
 </div>
 {% endblock %}

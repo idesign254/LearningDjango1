@@ -1,7 +1,6 @@
 from django import forms
 from .models import BlogPost
 from .models import Application
-from .models import Staff
 from .models import DocumentFile
 # from django.contrib.auth.models import User
 from .models import User
@@ -33,10 +32,6 @@ class ApprovalRequestForm(forms.Form):
     approver = forms.CharField(max_length=100, required=True)
     comments = forms.CharField(widget=forms.Textarea(attrs={'rows': 4}), required=False)
         
-class UserForm(forms.ModelForm):
-    class Meta:
-        model= Staff
-        fields=['address','mobile','profile_pic']
 
 class DocumentForm(forms.ModelForm):
     class Meta:
