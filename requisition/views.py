@@ -26,6 +26,8 @@ from django.utils.text import Truncator
 
 from .forms import SignupForm
 
+from django.urls import reverse
+
 # Create your views here.
 
 def home_view(request):
@@ -119,6 +121,7 @@ def make_application(request):
         success_message = ''
     return render(request, 'New_Application/Application.html', {'form': form, 'success_message': success_message})
 
+
 def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -163,3 +166,5 @@ def signup(request):
     else:
         form = SignupForm()
     return render(request, 'SignUp/signup.html', {'form': form})
+
+

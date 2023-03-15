@@ -140,6 +140,7 @@ th {
       <table>
         <thead>
           <tr>
+            <th>#</th>
             <th>Applicant Name</th>
             <th>Item</th>
             <th>Quantity Date</th>
@@ -152,6 +153,7 @@ th {
         <tbody>
           {% for application in applications %}
           <tr>
+            <td>{{ forloop.counter }}</td>
             <td>{{ application.applicant_name }}</td>
             <td>{{ application.item }}</td>
             <td>{{ application.quantity }}</td>

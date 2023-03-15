@@ -142,6 +142,7 @@ th {
       <table>
         <thead>
           <tr>
+            <th>#</th>
             <th>Document Name</th>
             <th>Uploaded By</th>
             <th>Uploaded Date</th>
@@ -152,6 +153,7 @@ th {
         <tbody>
           {% for document in documents %}
           <tr>
+            <td>{{ forloop.counter }}</td>
             <td>{{ document.document_name }}</td>
             <td>{{ document.uploaded_by }}</td>
             <td>{{ document.uploaded_date }}</td>
