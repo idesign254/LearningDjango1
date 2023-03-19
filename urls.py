@@ -11,13 +11,15 @@ from django.conf import settings
 urlpatterns = [
     path('',views.homepage),
     path('admin/', admin.site.urls),
+    
+    path('about/',views.about),
+    path('services/',views.services),
+    path('contact/',views.contact),
 
     #registers the app name
     url('articles/', include('articles.urls')),
     url('users/', include('users.urls')),
     url('requisition/', include('requisition.urls')),
-
-    url('ecommerce/', include('ecommerce.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

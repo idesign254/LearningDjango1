@@ -30,8 +30,6 @@ INSTALLED_APPS = [
     'articles',
     'users',
     'requisition',
-
-    'ecommerce'
 ]
 
 MIDDLEWARE = [
