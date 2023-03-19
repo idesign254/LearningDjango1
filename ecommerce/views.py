@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 
-def homepage(request):
+def shop_page(request):
     items = Item.objects.filter(is_sold=False)[0:6]
     categories = Category.objects.all()
     return render(request, 'shop.html', {'categories': categories,'items': items,})
@@ -46,14 +46,10 @@ def items(request):
         'category_id': int(category_id)
     })
 
-def detail(request, pk):
+def category_detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
     related_items = Item.objects.filter(category=item.category, is_sold=False).exclude(pk=pk)[0:3]
-
-    return render(request, 'items/detail.html', {
-        'item': item,
-        'related_items': related_items
-    })
+    return render(request, 'items/items.html', {'item': item,'related_items': related_items})
 
 @login_required
 def new(request):
