@@ -14,11 +14,9 @@ urlpatterns = [
 
     #registers the app name
     url('articles/', include('articles.urls')),
+
     url('requisition/', include('requisition.urls')),
 
     url('ecommerce/', include('ecommerce.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
