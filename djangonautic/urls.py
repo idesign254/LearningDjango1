@@ -14,7 +14,6 @@ urlpatterns = [
 
     #registers the app name
     url('articles/', include('articles.urls')),
-    url('users/', include('users.urls')),
     url('requisition/', include('requisition.urls')),
 
     url('ecommerce/', include('ecommerce.urls')),
