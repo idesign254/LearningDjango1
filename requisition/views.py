@@ -111,9 +111,7 @@ def make_application(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
         if form.is_valid():
-            application = form.save(commit=False)
-            application.user = request.user  # Ensure request.user is a valid User instance
-            application.save()
+            application = form.save()
             form = ApplicationForm()
             success_message = 'Your application has been submitted successfully!'
     else:

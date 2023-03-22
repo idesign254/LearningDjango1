@@ -42,7 +42,6 @@ class Application(models.Model):
     quantity = models.PositiveIntegerField()
     reason = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     approval = models.BooleanField(default=False)
 
     def __str__(self):
