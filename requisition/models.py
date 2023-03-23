@@ -38,6 +38,7 @@ class User(AbstractBaseUser):
 
 class Application(models.Model):
     applicant_name = models.CharField(max_length=100)
+    user =  models.ForeignKey(User, on_delete=models.CASCADE)
     item = models.CharField(max_length=100)
     quantity = models.PositiveIntegerField()
     reason = models.TextField()
