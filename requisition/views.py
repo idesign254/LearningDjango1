@@ -111,13 +111,28 @@ def make_application(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
         if form.is_valid():
-            application = form.save()
+            application = form.save(commit=False)
+            application.user = request.user
+            application.save()
             form = ApplicationForm()
             success_message = 'Your application has been submitted successfully!'
     else:
         form = ApplicationForm()
         success_message = ''
     return render(request, 'New_Application/Application.html', {'form': form, 'success_message': success_message})
+
+# @login_required(login_url='requisition:login')
+# def make_application(request):
+#     if request.method == 'POST':
+#         form = ApplicationForm(request.POST)
+#         if form.is_valid():
+#             application = form.save()
+#             form = ApplicationForm()
+#             success_message = 'Your application has been submitted successfully!'
+#     else:
+#         form = ApplicationForm()
+#         success_message = ''
+#     return render(request, 'New_Application/Application.html', {'form': form, 'success_message': success_message})
 
 
 def login_view(request):

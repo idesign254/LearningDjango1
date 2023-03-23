@@ -40,6 +40,7 @@ class Application(models.Model):
     applicant_name = models.CharField(max_length=100)
     item = models.CharField(max_length=100)
     quantity = models.PositiveIntegerField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     reason = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     approval = models.BooleanField(default=False)

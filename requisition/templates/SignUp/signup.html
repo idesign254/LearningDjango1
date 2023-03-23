@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -120,34 +122,33 @@ button[type="submit"]:hover {
 
 </style>
   </head>
+
   <body>
-{% block content %}
-<div style="margin-top: 100px;">
+    {% block content %}
+    <div style="margin-top: 100px;">
     
-    <form method="post" action=".">
-        <!-- <img src="your-logo.png" alt="Your Logo"> -->
-
+      <form method="post" action=".">
         {% csrf_token %}
+        
+          <div class="mb-3">
+              <label class="inline-block mb-2">Username</label><br>
+              {{ form.username }}
+          </div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Username</label><br>
-            {{ form.username }}
-        </div>
+          <div class="mb-3">
+              <label class="inline-block mb-2">Email</label><br>
+              {{ form.email }}
+          </div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Email</label><br>
-            {{ form.email }}
-        </div>
+          <div class="mb-3">
+              <label class="inline-block mb-2">Password</label><br>
+              {{ form.password1 }}
+          </div>
 
-        <div class="mb-3">
-            <label class="inline-block mb-2">Password</label><br>
-            {{ form.password1 }}
-        </div>
-
-        <div class="mb-3">
-            <label class="inline-block mb-2">Repeat password</label><br>
-            {{ form.password2 }}
-        </div>
+          <div class="mb-3">
+              <label class="inline-block mb-2">Repeat password</label><br>
+              {{ form.password2 }}
+          </div>
 
         {% if form.errors or form.non_field_errors %}
             <div class="mb-3 p-6 bg-red-100 rounded-xl">
