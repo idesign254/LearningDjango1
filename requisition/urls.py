@@ -11,6 +11,10 @@ from .views import document_detail
 
 from .views import view_document
 
+from .views import approve_document
+from .views import cancel_approval
+
+
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LogoutView
 from django.conf.urls.static import static
@@ -27,8 +31,13 @@ app_name = 'requisition'
 urlpatterns = [
     path('Blog/', create_post, name='post_new'),
     path('',views.home_view, name='home'),
+
     path('Cancel_Approval_Request/',views.Cancel_Approval_Request, name='cancel_approval_request'),
-    path('Document_Approval_Status/',views.Document_Approval_Status, name='document_approval_status'),
+    path('Cancel_Approval_Request/<int:document_id>/', cancel_approval, name='cancel_approval'),
+
+
+    path('Document_Approval_Status/',views.approved_documents, name='approved_documents'),
+    path('Document_Approval_Status/<int:document_id>/', approve_document, name='approve_document'),
 
     path('New_Application/',make_application, name='new_application'),
     path('Send_Approval_Request/',views.Send_Approval_Request, name='send_approval_request'),

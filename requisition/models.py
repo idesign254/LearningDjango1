@@ -68,6 +68,7 @@ class Document(models.Model):
     uploaded_by = models.CharField(max_length=100)
     uploaded_date = models.DateField()
     document_file = models.FileField(upload_to=get_file_path)
+    approval = models.BooleanField(default=False)
 
     def __str__(self):
         return self.document_name

@@ -28,6 +28,7 @@ from .forms import SignupForm
 
 from django.urls import reverse
 
+
 # Create your views here.
 
 def home_view(request):
@@ -35,9 +36,6 @@ def home_view(request):
 
 def Cancel_Approval_Request(request):
     return render(request, 'Cancel_Approval_Request/CancelApprovalRequest.html')
-
-def Document_Approval_Status(request):
-    return render(request, 'Document_Approval_Status/Approval.html')
 
 def New_Application(request):
     return render(request, 'New_Application/Application.html')
@@ -106,7 +104,21 @@ def approval_request_view(request):
     context = {'form': form}
     return render(request, 'Send_Approval_Request/SendApproval.html', context)    
 
-@login_required(login_url='requisition:login')
+# @login_required(login_url='requisition:login')
+# def make_application(request):
+#     if request.method == 'POST':
+#         form = ApplicationForm(request.POST)
+#         if form.is_valid():
+#             application = form.save(commit=False)
+#             application.user = request.user
+#             application.save()
+#             form = ApplicationForm()
+#             success_message = 'Your application has been submitted successfully!'
+#     else:
+#         form = ApplicationForm()
+#         success_message = ''
+#     return render(request, 'New_Application/Application.html', {'form': form, 'success_message': success_message})
+
 def make_application(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
@@ -121,18 +133,6 @@ def make_application(request):
         success_message = ''
     return render(request, 'New_Application/Application.html', {'form': form, 'success_message': success_message})
 
-# @login_required(login_url='requisition:login')
-# def make_application(request):
-#     if request.method == 'POST':
-#         form = ApplicationForm(request.POST)
-#         if form.is_valid():
-#             application = form.save()
-#             form = ApplicationForm()
-#             success_message = 'Your application has been submitted successfully!'
-#     else:
-#         form = ApplicationForm()
-#         success_message = ''
-#     return render(request, 'New_Application/Application.html', {'form': form, 'success_message': success_message})
 
 
 def login_view(request):
@@ -167,6 +167,28 @@ def document_detail(request, document_id):
     document = get_object_or_404(Document, id=document_id)
     context = {'document': document}
     return render(request, 'Single_Document_View/Single_Document.html', context)
+
+def Document_Approval_Status(request):
+    return render(request, 'Document_Approval_Status/Approval.html')
+
+
+def approve_document(request, document_id):
+    document = get_object_or_404(Document, id=document_id)
+    document.approval = True
+    document.save()
+    return redirect('requisition:document_detail', document_id=document_id)
+
+def cancel_approval(request, document_id):
+    document = get_object_or_404(Document, id=document_id)
+    if document.approval:
+        document.approval = False
+        document.save()
+    return redirect('requisition:document_detail', document_id=document_id)
+
+def approved_documents(request):
+    approved_docs = Document.objects.filter(approval=True)
+    return render(request, 'Documents/approved_documents.html', {'approved_docs': approved_docs})
+
 
 
 def signup(request):

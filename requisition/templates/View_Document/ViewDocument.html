@@ -1,8 +1,10 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <link rel="shortcut icon" href="{% static 'logo/must_logo.png' %}"" type="image/x-icon" /> 
     <title>View Document</title>
     <style>
         body {
@@ -147,6 +149,7 @@ th {
             <th>Uploaded By</th>
             <th>Uploaded Date</th>
             <th>File</th>
+            <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -159,6 +162,7 @@ th {
             <td>{{ document.uploaded_date }}</td>
             <!-- <td>{{ documents.document_file }}</td> -->
             <td><a href="{% static documents.document_file.url %}" target="_blank">{{ document.document_file.name }}</a></td>
+            <td>{{ document.approval }}</td>
             <!-- <td><button>View</button></td> -->
             <td><a href="{% url 'requisition:document_detail' document_id=document.id %}">View</a></td>
           </tr>

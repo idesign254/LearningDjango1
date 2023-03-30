@@ -1,6 +1,10 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <link rel="shortcut icon" href="{% static 'logo/must_logo.png' %}"" type="image/x-icon" /> 
     <title>View Document</title>
     <style>
         body {
@@ -172,19 +176,24 @@ table {
           <td>{{ document.uploaded_date }}</td>
         </tr>
         <tr>
+          <th>Document Status</th>
+          <td>{{ document.approval }}</td>
+        </tr>
+        <tr>
           <th>File</th>
           <!-- <td>{{ document.document_file.name }}</td> -->
           <td><a href="{{ documents.document_file.url }}">{{ document.document_file.name }}</a></td>
         </tr>
         <tr>
-          <th>Send Approval Request</th>
-          <td><a href="{% url 'requisition:send_approval_request' %}" class="button">Approve Request</a>
+          <th>Approve Document</th>
+          <td><a href="{% url 'requisition:approve_document' document_id=document.id %}" class="button">Approve Document</a>
           </td>
         </tr>
         <tr>
-          <th>Cancel Approval Request</th>
-          <td><a href="{% url 'requisition:cancel_approval_request' %}" class="button-danger">Cancel Approval Request</a></td>
+          <th>Cancel Document Approval</th>
+          <td><a href="{% url 'requisition:cancel_approval' document_id=document.id %}" class="button-danger">Cancel Approval Request</a></td>
         </tr>
+        
       </table>
       <a href="{% url 'requisition:view_document' %}" class="button-back">Back</a>
     {% endblock %}      
