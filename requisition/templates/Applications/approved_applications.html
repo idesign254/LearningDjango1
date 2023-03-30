@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
   <link rel="shortcut icon" href="{% static 'logo/must_logo.png' %}"" type="image/x-icon" /> 
-    <title>View Document</title>
+    <title>Approved Applications</title>
     <style>
         body {
         font-family: Arial, sans-serif;
@@ -119,96 +119,53 @@ h1 {
 
 /* Tacle CSS */
 table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-  }
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 100%;
+}
 
-  th, td {
-    text-align: left;
-    padding: 8px;
-    border: 1px solid #ddd;
-  }
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
 
-  th {
-    background-color: #f2f2f2;
-    color: #444;
-    font-weight: normal;
-  }
-
-  tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-
-  tr:hover {
-    background-color: #f5f5f5;
-  }
-
-  a {
-    color: #333;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #666;
-    text-decoration: underline;
-  }
-
+th {
+  background-color: #f2f2f2;
+}
     </style>
   </head>
   <body>
     {% include 'header.html' %}
 
+    
 
-    <div class="container">
-      {% block content %}
-      <table>
-        <tr>
-          <th>Applicant Name</th>
-          <td>{{ application.applicant_name }}</td>
-        </tr>
-        <tr>
-          <th>Item</th>
-          <td>{{ application.item }}</td>
-        </tr>
-        <tr>
-          <th>Quantity</th>
-          <td>{{ application.quantity }}</td>
-        </tr>
-        <tr>
-          <th>Reason</th>
-          <td>{{ application.reason }}</td>
-        </tr>
-        <tr>
-          <th>Date Created</th>
-          <td>{{ application.date_created }}</td>
-        </tr>
-        <tr>
-            <th>Approval Status</th>
-            <td>{{ application.approval }}</td>
-          </tr>
-          
-          {% if not application.approval %}
-        <tr>
-          <th>Approve Application</th>
-          <td><a href="{% url 'requisition:approve_application' pk=document.pk %}" class="button">Approve Application</a>
-          </td>
-        </tr>
-
-        {% else %}
-        <tr>
-          <th>Cancel Application</th>
-          <td><a href="" class="button-danger">Cancel Application</a></td>
-        </tr>
-        {% endif %}
-
-      </table>
-
-      
-      <a href="{% url 'requisition:view_applications' %}" class="button-back">Back</a>
-      
-    {% endblock %}
-      
-    </div>
-  </body>
-</html>
+{% block content %}
+<div class="container">
+    <h1>Approved Applications</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Document Name</th>
+                <th>Uploaded By</th>
+                <th>Uploaded Date</th>
+                <th>Document File</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in approved_docs %}
+                <tr>
+                    <td>{{ doc.document_name }}</td>
+                    <td>{{ doc.uploaded_by }}</td>
+                    <td>{{ doc.uploaded_date }}</td>
+                    <td><a href="{{ doc.document_file.url }}" target="_blank">{{ doc.document_file.name }}</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No approved documents found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

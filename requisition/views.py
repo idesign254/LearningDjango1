@@ -49,38 +49,6 @@ def search_results(request):
     results = Application.objects.filter(Q(applicant_name__icontains=query) | Q(item__icontains=query))
     return render(request, 'Search/search_results.html', {'results': results, 'query': query})
 
-class ApplicationApprovalView(View):
-    def post(self, request, pk):
-        application = get_object_or_404(Application, pk=pk)
-
-        # Update the status of the application to reflect the approval.
-        application.status = 'approved'
-        application.save()
-
-        # Send an email notification to the applicant.
-        send_mail(
-            'Your application has been approved',
-            'Congratulations, your application has been approved!',
-            settings.DEFAULT_FROM_EMAIL,
-            [application.applicant.email],
-            fail_silently=False,
-        )
-
-        # Render a confirmation message to the user.
-        return render(request, 'Approval/application_approval.html', {'message': message})
-
-@login_required(login_url='requisition:login')
-def View_Applications(request):
-    applications = Application.objects.all()
-    return render(request, 'Applications/View_Application.html', {'applications': applications})
-
-
-@login_required(login_url='requisition:login')
-def application_detail(request, pk):
-    application = get_object_or_404(Application, pk=pk)
-    context = {'application': application}
-    return render(request, 'Single_Application/View_User_Application.html', context)
-
 def create_post(request):
     if request.method == 'POST':
         form = BlogPostForm(request.POST)
@@ -104,27 +72,15 @@ def approval_request_view(request):
     context = {'form': form}
     return render(request, 'Send_Approval_Request/SendApproval.html', context)    
 
-# @login_required(login_url='requisition:login')
-# def make_application(request):
-#     if request.method == 'POST':
-#         form = ApplicationForm(request.POST)
-#         if form.is_valid():
-#             application = form.save(commit=False)
-#             application.user = request.user
-#             application.save()
-#             form = ApplicationForm()
-#             success_message = 'Your application has been submitted successfully!'
-#     else:
-#         form = ApplicationForm()
-#         success_message = ''
-#     return render(request, 'New_Application/Application.html', {'form': form, 'success_message': success_message})
+
+
 
 def make_application(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
         if form.is_valid():
             application = form.save(commit=False)
-            application.user = request.user
+            # application.user = request.user
             application.save()
             form = ApplicationForm()
             success_message = 'Your application has been submitted successfully!'
@@ -132,6 +88,41 @@ def make_application(request):
         form = ApplicationForm()
         success_message = ''
     return render(request, 'New_Application/Application.html', {'form': form, 'success_message': success_message})
+
+@login_required(login_url='requisition:login')
+def View_Applications(request):
+    applications = Application.objects.all()
+    return render(request, 'View_Applications/View_Application.html', {'applications': applications})
+
+@login_required(login_url='requisition:login')
+def application_detail(request, pk):
+    application = get_object_or_404(Application, pk=pk)
+    context = {'application': application}
+    return render(request, 'Single_Application/View_User_Application.html', context)
+
+
+
+def approve_application(request, application_id):
+    application = get_object_or_404(Application, id=application_id)
+    application.approval = True
+    application.save()
+    return redirect('requisition:application_detail', application_id=application_id)
+
+def cancel_application(request, application_id):
+    application = get_object_or_404(Application, id=application_id)
+    if application.approval:
+        application.approval = False
+        application.save()
+    return redirect('requisition:application_detail', application_id=application_id)
+
+def approved_applications(request):
+    approved_docs = Document.objects.filter(approval=True)
+    return render(request, 'Applications/approved_applications.html', {'approved_docs': approved_docs})
+
+
+
+
+
 
 
 

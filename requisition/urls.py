@@ -3,7 +3,6 @@ from .import views
 from .views import create_post
 from .views import make_application
 from .views import application_detail
-from .views import ApplicationApprovalView
 from .views import search_results
 from .views import login_view
 from .views import upload_document
@@ -13,6 +12,9 @@ from .views import view_document
 
 from .views import approve_document
 from .views import cancel_approval
+
+from .views import approve_application
+from .views import cancel_application
 
 
 from django.contrib.auth import views as auth_views
@@ -40,12 +42,18 @@ urlpatterns = [
     path('Document_Approval_Status/<int:document_id>/', approve_document, name='approve_document'),
 
     path('New_Application/',make_application, name='new_application'),
+    path('Single_Application/<int:pk>/', views.application_detail, name='application_detail'),
+
+    path('Send_Approval_Request/',views.approve_application, name='approve_application'),
+    path('Send_Approval_Request/<int:pk>/', cancel_application, name='cancel_application'),
+
+
     path('Send_Approval_Request/',views.Send_Approval_Request, name='send_approval_request'),
 
     path('View_Document/',views.View_Document,name='view_document'),
-    path('Applications/',views.View_Applications,name='view_applications'),
+    path('View_Applications/',views.View_Applications,name='view_applications'),
 
-    path('Single_Application/<int:pk>/', views.application_detail, name='application_detail'),
+    
 
     path('Search/', views.search_results, name='search_results'),
     
