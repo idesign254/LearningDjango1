@@ -185,14 +185,19 @@ table {
           <td><a href="{{ documents.document_file.url }}">{{ document.document_file.name }}</a></td>
         </tr>
         <tr>
+
+          {% if not document.approval %}
           <th>Approve Document</th>
           <td><a href="{% url 'requisition:approve_document' document_id=document.id %}" class="button">Approve Document</a>
           </td>
         </tr>
+
+        {% else %}
         <tr>
           <th>Cancel Document Approval</th>
           <td><a href="{% url 'requisition:cancel_approval' document_id=document.id %}" class="button-danger">Cancel Approval Request</a></td>
         </tr>
+        {% endif %}
         
       </table>
       <a href="{% url 'requisition:view_document' %}" class="button-back">Back</a>
