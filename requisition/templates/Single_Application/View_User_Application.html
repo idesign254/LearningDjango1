@@ -191,14 +191,14 @@ table {
           {% if not application.approval %}
         <tr>
           <th>Approve Application</th>
-          <td><a href="{% url 'requisition:approve_application' pk=document.pk %}" class="button">Approve Application</a>
+          <td><a href="{% url 'requisition:approve_application' application_id=application.id %}" class="button">Approve Application</a>
           </td>
         </tr>
 
         {% else %}
         <tr>
           <th>Cancel Application</th>
-          <td><a href="" class="button-danger">Cancel Application</a></td>
+          <td><a href="{% url 'requisition:cancel_application' application_id=application.id %}" class="button-danger">Cancel Application</a></td>
         </tr>
         {% endif %}
 

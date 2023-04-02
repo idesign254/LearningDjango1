@@ -1,5 +1,4 @@
 from django import forms
-from .models import BlogPost
 from .models import Application
 from .models import DocumentFile
 # from django.contrib.auth.models import User
@@ -21,10 +20,6 @@ class ApplicationForm(forms.ModelForm):
         model = Application
         fields = ('applicant_name', 'item', 'quantity', 'reason')
 
-class BlogPostForm(forms.ModelForm):
-    class Meta:
-        model = BlogPost
-        fields = ['title', 'content']
 
 class ApprovalRequestForm(forms.Form):
     document_type = forms.ChoiceField(choices=[(1, 'Purchase Order'), (2, 'Travel Request'), (3, 'Expense Report')], required=True)

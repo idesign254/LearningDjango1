@@ -9,7 +9,6 @@ from django.core.files.storage import FileSystemStorage
 from .models import School
 from .models import Document
 from .models import Application
-from .forms import BlogPostForm
 
 from .forms import ApplicationForm
 
@@ -49,29 +48,11 @@ def search_results(request):
     results = Application.objects.filter(Q(applicant_name__icontains=query) | Q(item__icontains=query))
     return render(request, 'Search/search_results.html', {'results': results, 'query': query})
 
-def create_post(request):
-    if request.method == 'POST':
-        form = BlogPostForm(request.POST)
-        if form.is_valid():
-            form.save()
-            form = BlogPostForm()  # Reset the form for next submission
-            success_message = 'Your post has been submitted successfully!'
-    else:
-        form = BlogPostForm()
-        success_message = ''
-    return render(request, 'Blog/blog_post.html', {'form': form, 'success_message': success_message})
-
 
 @login_required(login_url='requisition:login')
 def View_Document(request):
     documents = Document.objects.all()
     return render(request, 'View_Document/ViewDocument.html', {'documents': documents})
-
-def approval_request_view(request):
-    form = ApprovalRequestForm()
-    context = {'form': form}
-    return render(request, 'Send_Approval_Request/SendApproval.html', context)    
-
 
 
 
@@ -100,24 +81,22 @@ def application_detail(request, pk):
     context = {'application': application}
     return render(request, 'Single_Application/View_User_Application.html', context)
 
-
-
 def approve_application(request, application_id):
     application = get_object_or_404(Application, id=application_id)
     application.approval = True
     application.save()
-    return redirect('requisition:application_detail', application_id=application_id)
+    return redirect('requisition:application_detail', pk=application.pk)
 
 def cancel_application(request, application_id):
     application = get_object_or_404(Application, id=application_id)
     if application.approval:
         application.approval = False
         application.save()
-    return redirect('requisition:application_detail', application_id=application_id)
+    return redirect('requisition:application_detail', pk=application.pk)
 
 def approved_applications(request):
     approved_docs = Document.objects.filter(approval=True)
-    return render(request, 'Applications/approved_applications.html', {'approved_docs': approved_docs})
+    return render(request, 'Approved_Applications/approved_applications.html', {'approved_docs': approved_docs})
 
 
 
@@ -178,7 +157,7 @@ def cancel_approval(request, document_id):
 
 def approved_documents(request):
     approved_docs = Document.objects.filter(approval=True)
-    return render(request, 'Documents/approved_documents.html', {'approved_docs': approved_docs})
+    return render(request, 'Approved_Documents/approved_documents.html', {'approved_docs': approved_docs})
 
 
 

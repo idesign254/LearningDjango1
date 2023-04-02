@@ -8,7 +8,6 @@
       </a>
       
       <ul>
-        <li><a href="{% url 'requisition:signup' %}">SignUp</a></li>
         {% if user.is_authenticated %}
           <li><a href="{% url 'requisition:logout' %}">Logout</a></li>
         {% else %}
