@@ -65,6 +65,7 @@ def make_application(request):
             application.save()
             form = ApplicationForm()
             success_message = 'Your application has been submitted successfully!'
+            return redirect(reverse('requisition:view_applications'))
     else:
         form = ApplicationForm()
         success_message = ''
@@ -72,7 +73,7 @@ def make_application(request):
 
 @login_required(login_url='requisition:login')
 def View_Applications(request):
-    applications = Application.objects.all()
+    applications = Application.objects.order_by('-date_created')
     return render(request, 'View_Applications/View_Application.html', {'applications': applications})
 
 @login_required(login_url='requisition:login')
@@ -95,8 +96,8 @@ def cancel_application(request, application_id):
     return redirect('requisition:application_detail', pk=application.pk)
 
 def approved_applications(request):
-    approved_docs = Document.objects.filter(approval=True)
-    return render(request, 'Approved_Applications/approved_applications.html', {'approved_docs': approved_docs})
+    approved_applicants = Application.objects.filter(approval=True)
+    return render(request, 'Approved_Applications/approved_applications.html', {'approved_applicants': approved_applicants})
 
 
 
